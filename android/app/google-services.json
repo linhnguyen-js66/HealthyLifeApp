@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "283999258172",
+    "firebase_url": "https://healthylife-a326d.firebaseio.com",
+    "project_id": "healthylife-a326d",
+    "storage_bucket": "healthylife-a326d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283999258172:android:fd0b9ade84b655463d6539",
+        "android_client_info": {
+          "package_name": "com.healthylife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283999258172-ja6d1mih8lpunihj7attd22p6djmh8jp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVcCObdxFnJPR6PLAev07s8mSBIB41ngY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283999258172-ja6d1mih8lpunihj7attd22p6djmh8jp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
