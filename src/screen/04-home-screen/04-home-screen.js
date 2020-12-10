@@ -33,8 +33,10 @@ const EmailandNameUser = ({ name, email, onDisplay }) => {
 const HomeScreen = () => {
     const navigation = useNavigation()
     const [userInformation, getUserInformation] = useState([])
+    const [currentUserInfo, getCurrentUserInfo] = useState()
     const uid = auth().currentUser.uid
     console.log(uid)
+    //userInformation
     const getUserInformationFromFirebase = async () => {
         const arrContainDataUserInfo = []
         const getDataInfoFromFirebase = await firestore().collection('UserInformation').get()
@@ -42,11 +44,43 @@ const HomeScreen = () => {
             arrContainDataUserInfo.push(data.data())
         }
         getUserInformation(arrContainDataUserInfo)
+        const currentUserData = arrContainDataUserInfo.filter(userInfo => userInfo.idUser === uid)[0]
+        getCurrentUserInfo(currentUserData)
     }
-    console.log(userInformation)
 
     useEffect(() => { getUserInformationFromFirebase() }, [])
+    //History
+    const [History, setHistory] = useState([])
+    const getDataHistoryFromFirebase = async () => {
+        const newListHistory = []
+        const getDataHistory = await firestore().collection('HistoryAte').get()
+        for (let item of getDataHistory.docs) {
+            newListHistory.push(item.data())
+        }
+        setHistory(newListHistory)
+    }
+    useEffect(() => { getDataHistoryFromFirebase() }, [])
+    const [date,setDate] = useState([])
+    const [kcal,setKcal] = useState([])
+    const pushKcalInArray = () => {
+        const arrKcal = []
+        const arrDate = []
+        History.map((item)=>{
+            if(currentUserInfo.idUser == item.id){
+               arrKcal.push(item.total)
+               arrDate.push(item.time.date.toString())
+               arrDate.sort(function(a, b){return a - b})
+            }
+        })
 
+        setDate(arrDate)
+        setKcal(arrKcal)
+    }
+
+    useEffect(()=>{pushKcalInArray()},[History])
+    console.log(date)
+    console.log(kcal)
+    //
     const [weightMode,setWeightMode] = useState([])
     const getWeightMode = async () => {
         const arrWeightMode = []
@@ -129,9 +163,10 @@ const HomeScreen = () => {
                             <Text>Xem thêm</Text>
                             <Icon name="right" type="antdesign" size={15} marginTop={3} />
                         </TouchableOpacity>
+                  
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Chart />
+                        <Chart dataKcal={kcal} label={date}/>
                     </View>
                 </View>
             </View>

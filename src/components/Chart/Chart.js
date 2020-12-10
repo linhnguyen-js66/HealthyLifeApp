@@ -1,17 +1,14 @@
 import React from 'react'
-import { View, ViewStyle, Text, Image, ScrollView, TouchableOpacity, TextInput } from "react-native"
-import style from './style'
-import LinearGradient from 'react-native-linear-gradient';
 import {LineChart} from "react-native-chart-kit"
 import { Dimensions } from "react-native";
 const Data = [1000,1200,1000,950,1000,1100,1350]
-const Chart = () => {
+const Chart = ({dataKcal,label}) => {
     const screenWidth = Dimensions.get("window").width -32;
     const data = {
-        labels: ["2", "3", "4", "5", "6", "7", "CN"],
+        labels: label,
         datasets: [
           {
-            data:Data,
+            data:dataKcal,
             color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
             strokeWidth: 2 // optional
           }
